@@ -1,0 +1,70 @@
+#!/bin/bash
+clear
+function TITLE(){
+    echo " ______              ______ _ _      "
+    echo "|___  /              |  ___(_) |     "
+    echo "   / /  ___ _ __ ___ | |_   _| | ___ "
+    echo "  / /  / _   '__/ _  |  _| | | |/ _  "
+    echo "./ /__|  __/ | | (_) | |   | | |  __/"
+    echo "\_____/\___|_|  \___/\_|   |_|_|\___|"
+    echo "                                     "
+}                             
+TITLE                             
+
+echo ""
+echo -n "select drive: "
+read DRV
+echo ""
+echo "How many passes"
+echo "1. Two passes"
+echo "      Ranom flip, and then zeros"
+echo "2. four passes" 
+echo "      Random, Zero, Random, and final Zero pass"
+echo "3. Six passes"
+echo "      Random, Zero, Random, Zero, Random, and final Zero pass"
+echo "4. Eight passes"
+echo "       Random, Zero, Random, Zero, Random, Zero, Random, Zero"
+echo -n "Select 1-4: "
+read VAR
+
+if (("$VAR" >= "1"))
+then
+    echo " "
+    echo " Pass 1/8: Random Bites: "
+    dd if=/dev/urandom of=/dev/$DRV bs=1M status=progress
+    echo ""
+    echo " Pass 2/8: Zero Bites: "
+    dd if=/dev/zero of=/dev/$DRV bs=1M status=progress
+fi
+if (("$VAR" >= "2"))
+then
+    echo ""
+    echo " Pass 3/8: Random Bites: "
+    dd if=/dev/urandom of=/dev/$DRV bs=1M status=progress
+    echo ""
+    echo " Pass 4/8: Zero Bites: "
+    dd if=/dev/zero of=/dev/$DRV bs=1M status=progress
+fi
+if (("$VAR" >= "3"))
+then
+    echo ""
+    echo " Pass 5/8: Random Bites: "
+    dd if=/dev/urandom of=/dev/$DRV bs=1M status=progress
+    echo ""
+    echo " Pass 6/8: Zero Bites: "
+    dd if=/dev/zero of=/dev/$DRV bs=1M status=progress
+fi
+if (("$VAR" >= "4"))
+then
+    echo ""
+    echo " Pass 7/8: Random Bites: "
+    dd if=/dev/urandom of=/dev/$DRV bs=1M status=progress
+    echo ""
+    echo " Pass 8/8 pass: Zero Bites: "
+    dd if=/dev/zero of=/dev/$DRV bs=1M status=progress
+fi
+echo " "
+echo " "
+echo "      Finished with no errors"
+
+
